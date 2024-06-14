@@ -3,11 +3,12 @@
 using System.Diagnostics;
 
 decimal t = 50;
-decimal presicion = 1;
+decimal presicion = 100;
 int counter = 0;
 
 while (true)
 {
+    int called = -1;
     counter++;
     while (true)
     {
@@ -18,11 +19,21 @@ while (true)
         decimal min = new[] { current, above, below } .Min();
         if (above == min)
         {
+            if (!(called == -1 || called == 1))
+            {
+                Environment.Exit(0);
+            }
+            called = 1;
             t += presicion;
             continue;
         }
         if (below == min)
         {
+            if (!(called == -1 || called == 2))
+            {
+                Environment.Exit(0);
+            }
+            called = 2;
             t -= presicion;
             continue;
         }
